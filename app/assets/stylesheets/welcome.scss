@@ -1,3 +1,59 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  height: 100%;
+  margin: 0;
+}
+header {
+  background-color: #2E2F30;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+section {
+  min-height: 30%;
+
+
+}
+.container {
+  height: 100%;
+}
+.vcenter {
+  display: flex;
+  //  vertical-align: middle;
+  min-height: 100%;
+  min-height: 100vh;
+  align-items: center;
+}
+.jumbotron {
+  width: 100%;
+}
+
+.sky1 {
+  color: #CCCCCC;
+  background: linear-gradient(to bottom, #2E2F30, #404F58);
+}
+.sky2 {
+  color: #999999;
+  background: linear-gradient(to bottom, #404F58, #526F81);
+}
+.sky3 {
+  background: linear-gradient(to bottom, #526F81, #638EA9);
+}
+.sky4 {
+  background: linear-gradient(to bottom, #638EA9, #75AED2);
+}
+.sky5 {
+  background: linear-gradient(to bottom, #75AED2, #87CEFA);
+}
+.sky6 {
+  background: linear-gradient(to bottom, #87CEFA, #FFFFFF);
+}
+.star {
+  color: khaki;
+  text-align: center;
+  font-size: 300%;
+  margin-top: -12px;
+}

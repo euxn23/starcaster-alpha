@@ -1,0 +1,9 @@
+<% tweet.urls.each do |url| %>
+  <% if user.h_id.present? %>
+      <%= link_to '[H]', api_post_path(provider: 'hatena', url: url.url), remote: true %>
+    <% end %>
+    <% if user.p_id.present? %>
+      <%= link_to '[P]', api_post_path(provider: 'hatena', url: url.url), remote: true %>
+    <% end %>
+    <%= link_to url.title, url.url %>
+<% end %>

@@ -1,0 +1,19 @@
+<div class="panel panel-primary">
+<div  class="panel-heading">
+  <p class="panel-title"><%= title %></p>
+</div>
+<div class="panel-body" style="height: 1600px; overflow: scroll; padding: 0px;">
+  <div class="list-group" style="margin-bottom: -10px">
+    <% tweets.each do |tweet|%>
+        <div class="list-group-item">
+          <%= link_to image_tag(tweet.user_image_bigger, class: 'pull-left img-circle twitter-icon'), "https://twitter.com/#{tweet.user_sid}", target: :_blank %>
+          <div style="overflow: hidden">
+            <h4 class="list-group-item-heading"><%= tweet.user_name %>(<%= tweet.user_sid %>)</h4>
+            <p class="list-group-item-text"><%= auto_link tweet.text %></p>
+          </div>
+          <%= render partial: "users/#{type}", locals: {tweet: tweet, user:user} %>
+        </div>
+    <% end %>
+  </div>
+</div>
+</div>

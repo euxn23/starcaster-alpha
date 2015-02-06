@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,14 +31,35 @@ group :development, :test do
   gem 'pry-stack_explorer' # スタックをたどれる
 end
 
-gem 'pry'
+gem 'activerecord-import'
+gem 'rails_autolink'
+
+gem 'devise'
+gem 'omniauth-twitter'
+gem 'omniauth-hatena'
+gem 'omniauth-pocket'
+gem 'omniauth-qiita'
+
+gem 'twitter'
+#gem 'faraday', '0.9.1'
+#gem 'faraday', '0.8.9'
+gem 'faraday_middleware'
+gem 'qiita'
+#gem 'pocket-ruby'
+
+require 'hatena/bookmark/restful/v1'
+
+gem 'nokogiri'
+gem 'open_uri_redirections'
+
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
-gem 'twitter'
-gem 'omniauth-twitter'
-gem 'devise'
+gem 'json'
+
 gem 'dotenv-rails'
 
+gem 'pry'
+gem 'better_errors'
 
 
 # Use ActiveModel has_secure_password
