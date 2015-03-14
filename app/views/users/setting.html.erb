@@ -20,7 +20,7 @@
           <p>Twitterからあなたのお気に入りを取得します。</p>
           <p>直近約3000件からリンクや画像を含むツイートを取得し、保存します。</p>
           <p>この処理にはしばらく時間がかかります。</p>
-          <p><%= link_to 'お気に入りを取得', '/users/fetch', class:"btn btn-primary btn-lg"  %></p>
+          <p><%= link_to 'お気に入りを取得', '/users/fetch', remote: true, class:"btn btn-primary btn-lg"  %></p>
         </div>
         <div class="tab-pane fade" id="hatena">
           <% if @user.h_id.present? %>

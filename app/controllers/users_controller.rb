@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    redirect_to root_path
   end
 
   # GET /users/1
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
       rescue Twitter::Error::NotFound
         flash[:alert] = 'User not found in Twitter.'
         redirect_to root_path and return
-      rescue
+      rescue Exception
         flash[:alert] = 'Rate Limited in Twitter.'
         redirect_to root_path and return
       end
@@ -85,68 +85,73 @@ class UsersController < ApplicationController
   end
 
   def fetch
-    if user_signed_in?
-      @user = current_user
+    unless user_signed_in? || session[:fetching]
+      return
+    end
 
-      tw = Twitter::REST::Client.new do |config|
-        config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
-        config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
-        config.access_token = @user.tw_key
-        config.access_token_secret = @user.tw_secret
-      end
+    session[:fetching] = true
+    @user = current_user
 
-      responses = []
-      begin
-        if @user.preset_fav.present?
-          preset = @user.preset_fav
-          responses += res = tw.favorites(count: 200, since_id: preset)
-          5.times do
-            id = res[-1].id - 1
-            responses += res = tw.favorites(count: 200, max_id: id, since_id: preset)
-            break if res.empty?
-          end
-          if responses[0].present?
-            @user.preset_fav = responses[0].id
-            @user.save
-          end
-        else
-          responses += res = tw.favorites(count: 200)
-          5.times do
-            id = res[-1].id - 1
-            responses += res = tw.favorites(count: 200, max_id: id)
-          end
+    tw = Twitter::REST::Client.new do |config|
+      config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
+      config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
+      config.access_token = @user.tw_key
+      config.access_token_secret = @user.tw_secret
+    end
+
+    responses = []
+    begin
+      if @user.preset_fav.present?
+        preset = @user.preset_fav
+        responses += res = tw.favorites(count: 200, since_id: preset)
+        5.times do
+          id = res[-1].id - 1
+          responses += res = tw.favorites(count: 200, max_id: id, since_id: preset)
+          break if res.empty?
+        end
+        if responses[0].present?
           @user.preset_fav = responses[0].id
           @user.save
         end
-      rescue
+      else
+        responses += res = tw.favorites(count: 200)
+        5.times do
+          id = res[-1].id - 1
+          responses += res = tw.favorites(count: 200, max_id: id)
+        end
+        @user.preset_fav = responses[0].id
+        @user.save
       end
-
-      favorites = []
-      responses.each do |status|
-        next unless status.urls? or status.media?
-        next if status.attrs[:user][:protected]
-        favorite = {
-            user: @user,
-            tweet: Tweet.new(
-                post_id: status.id,
-                text: status.text,
-                user_name: status.attrs[:user][:name],
-                user_sid: status.attrs[:user][:screen_name],
-                user_uid: status.attrs[:user][:id_str],
-                user_image: status.attrs[:user][:profile_image_url].sub('_normal', ''),
-                tweeted_at: status.attrs[:created_at],
-                media: status.media.map{|medium| Medium.new(url: medium.media_url.to_s)},
-                urls: status.urls.map{|url| Url.new(url: url.attrs[:url])}
-            )
-        }
-        Favorite.create(favorite)
-      end
+    rescue
     end
 
-    redirect_to controller: :welcome, action: :index
+    favorites = []
+    responses.each do |status|
+      next unless status.urls? or status.media?
+      next if status.attrs[:user][:protected]
+      favorite = {
+          user: @user,
+          tweet: Tweet.new(
+              post_id: status.id,
+              text: status.text,
+              user_name: status.attrs[:user][:name],
+              user_sid: status.attrs[:user][:screen_name],
+              user_uid: status.attrs[:user][:id_str],
+              user_image: status.attrs[:user][:profile_image_url].sub('_normal', ''),
+              tweeted_at: status.attrs[:created_at],
+              media: status.media.map{|medium| Medium.new(url: medium.media_url.to_s)},
+              urls: status.urls.map{|url| Url.new(url: url.attrs[:url])}
+          )
+      }
+      Favorite.create(favorite)
+    end
+    session[:fetching] = false
+
+    # redirect_to controller: :welcome, action: :index
+    render nothing: true
   end
 
-  def api_post
+  def save
     binding.pry
     provider = params[:provider]
     url = params[:url]
@@ -164,9 +169,9 @@ class UsersController < ApplicationController
           @hatena = Hatena::Bookmark::Restful::V1.new(credentials)
         end
 
-        $hatena.create_bookmark(url)
+        @hatena.create_bookmark(url)
       when 'pocket'
-        unless $pocket
+        unless @pocket
 
         end
       when 'qiita'
@@ -227,6 +232,10 @@ class UsersController < ApplicationController
   end
 
   private
+    def _fetch
+
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

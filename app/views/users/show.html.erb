@@ -8,9 +8,9 @@
 <div class="col-lg-9">
   <%= bootstrap_flash %>
   <div class="col-lg-6">
-    <%= render partial: 'users/twitter', locals: {tweets: @urls, user: @user, title: :Urls, type: :urls} %>
+    <%= render partial: 'users/twitter', locals: {tweets: @urls, user: @user, title: :Urls, type: :urls} if @urls %>
   </div>
   <div class="col-lg-6">
-    <%= render partial: 'users/twitter', locals: {tweets: @media, user: @user, title: :Media, type: :media} %>
+    <%= render partial: 'users/twitter', locals: {tweets: @media, user: @user, title: :Media, type: :media} if @media %>
   </div>
 </div>

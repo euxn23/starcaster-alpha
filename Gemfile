@@ -56,6 +56,8 @@ gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'json'
 
+gem 'react-rails'
+
 gem 'dotenv-rails'
 
 gem 'pry'
