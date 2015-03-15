@@ -45,7 +45,7 @@ development:
 production:
   adapter: postgresql
   encoding: utf8mb4
-  database: d1r4m1blevvkil
+  database: d592447avfg3k9
   port: 5432
-  username: tlfynafudrlphk
-  password: AzQ2aG6_dtd14hiU6VEm1pKG8R
+  username: pezgaleilnkrtc
+  password: lglDRmWMG3R6gKJutWHnOz5U8T
