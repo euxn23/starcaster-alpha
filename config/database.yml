@@ -34,11 +34,18 @@ development:
   password:
   socket: /tmp/mysql.sock
 
+# production:
+#   adapter: mysql2
+#   encoding: utf8mb4
+#   database: starcaster_production
+#   pool: 5
+#   username: root
+#   password:
+#   socket: /tmp/mysql.sock
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8mb4
-  database: starcaster_production
-  pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  database: d1r4m1blevvkil
+  port: 5432
+  username: tlfynafudrlphk
+  password: AzQ2aG6_dtd14hiU6VEm1pKG8R
