@@ -44,7 +44,7 @@ development:
 #   socket: /tmp/mysql.sock
 production:
   adapter: postgresql
-  encoding: utf8mb4
+  encoding: utf8
   database: d592447avfg3k9
   port: 5432
   username: pezgaleilnkrtc
