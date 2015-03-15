@@ -156,6 +156,11 @@ GEM
       omniauth-oauth (~> 1.0)
     open_uri_redirections (0.2.1)
     orm_adapter (0.5.0)
+    pocket-ruby (0.0.6)
+      faraday (>= 0.7)
+      faraday_middleware (~> 0.9)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -308,6 +313,7 @@ DEPENDENCIES
   omniauth-qiita
   omniauth-twitter
   open_uri_redirections
+  pocket-ruby
   pry
   pry-byebug
   pry-doc

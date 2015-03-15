@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'users/' => 'users#index'
   get 'users/setting' => 'users#setting'
   get 'users/fetch' => 'users#fetch'
-  get 'users/api_post' => 'users#api_post', as: :api_post
+  get 'users/save' => 'users#save', as: :save
 
   resources :users, only: :show
 

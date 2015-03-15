@@ -45,7 +45,7 @@ gem 'twitter'
 #gem 'faraday', '0.8.9'
 gem 'faraday_middleware'
 gem 'qiita'
-#gem 'pocket-ruby'
+gem 'pocket-ruby'
 
 require 'hatena/bookmark/restful/v1'
 

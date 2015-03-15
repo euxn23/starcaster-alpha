@@ -152,32 +152,31 @@ class UsersController < ApplicationController
   end
 
   def save
-    binding.pry
-    provider = params[:provider]
-    url = params[:url]
-    user = current_user
-    unless [provider, url, user].include?(nil)
-      case provider
-      when 'hatena'
-        unless @hatena
-          credentials = Hatena::Bookmark::Restful::V1::Credentials.new(
-              consumer_key: ENV['HATENA_CONSUMER_KEY'],
-              consumer_secret: ENV['HATENA_CONSUMER_SECRET'],
-              access_token: user.h_key,
-              access_token_secret: user.h_secret
-          )
-          @hatena = Hatena::Bookmark::Restful::V1.new(credentials)
-        end
-
-        @hatena.create_bookmark(url)
-      when 'pocket'
-        unless @pocket
-
-        end
-      when 'qiita'
-
-      end
-    end
+    # provider = params[:provider]
+    # url = params[:url]
+    # user = current_user
+    # unless [provider, url, user].include?(nil)
+    #   case provider
+    #   when 'hatena'
+    #     unless @hatena
+    #       credentials = Hatena::Bookmark::Restful::V1::Credentials.new(
+    #           consumer_key: ENV['HATENA_CONSUMER_KEY'],
+    #           consumer_secret: ENV['HATENA_CONSUMER_SECRET'],
+    #           access_token: user.h_key,
+    #           access_token_secret: user.h_secret
+    #       )
+    #       @hatena = Hatena::Bookmark::Restful::V1.new(credentials)
+    #     end
+    #
+    #     @hatena.create_bookmark(url)
+    #   when 'pocket'
+    #     unless @pocket
+    #
+    #     end
+    #   when 'qiita'
+    #
+    #   end
+    # end
 
     render nothing: true
   end
