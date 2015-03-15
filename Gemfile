@@ -25,12 +25,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-group :development, :test do
-  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
-  gem 'pry-doc'    # methodを表示
-  gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
-  gem 'pry-stack_explorer' # スタックをたどれる
-end
+# group :development, :test do
+#   gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+#   gem 'pry-doc'    # methodを表示
+#   gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
+#   gem 'pry-stack_explorer' # スタックをたどれる
+# end
 
 gem 'activerecord-import'
 gem 'rails_autolink'
@@ -42,13 +42,8 @@ gem 'omniauth-pocket'
 gem 'omniauth-qiita'
 
 gem 'twitter'
-#gem 'faraday', '0.9.1'
-#gem 'faraday', '0.8.9'
-gem 'faraday_middleware'
-gem 'qiita'
-gem 'pocket-ruby'
-
-require 'hatena/bookmark/restful/v1'
+# gem 'qiita'
+# gem 'pocket-ruby'
 
 gem 'nokogiri'
 gem 'open_uri_redirections'
